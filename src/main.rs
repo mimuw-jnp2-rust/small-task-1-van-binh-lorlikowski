@@ -23,14 +23,14 @@ const TAKEAWAY_FEE: u32 = 1;
 #[derive(Debug, Clone)]
 struct Order {
     dishes: Vec<Dish>,
-    takeaway: bool
+    takeaway: bool,
 }
 
 impl Order {
     fn new() -> Order {
         Order {
             dishes: Vec::new(),
-            takeaway: false
+            takeaway: false,
         }
     }
 
@@ -92,12 +92,15 @@ impl VanBinh {
     pub fn new() -> VanBinh {
         VanBinh {
             orders_count: 1,
-            customers: Vec::new()
+            customers: Vec::new(),
         }
     }
 
     fn add_customer(&mut self, name: String, favorite_order: Order) {
-        self.customers.push(Customer {name, favorite_order});
+        self.customers.push(Customer {
+            name,
+            favorite_order,
+        });
     }
 
     fn get_saved_customer(&self, name: &str) -> Option<&Customer> {
@@ -177,10 +180,10 @@ fn main() {
             order
         };
 
-        if order.items_count() == 0 { // Check if the order is empty
+        if order.items_count() == 0 {
+            // Check if the order is empty
             println!("Your order is empty!");
-        }
-        else {
+        } else {
             println!("This is order no. {}", van_binh.get_orders_count());
             println!(
                 "There you go: {}, it's going to be {} zł",
@@ -188,7 +191,7 @@ fn main() {
                 order.total()
             );
             van_binh.increase_orders_count();
-        }   
+        }
     }
     println!("Bye!");
 }
